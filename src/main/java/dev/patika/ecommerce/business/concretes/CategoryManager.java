@@ -17,4 +17,9 @@ public class CategoryManager implements ICategoryService {
     public Category save(Category category) {
         return this.categoryRepo.save(category);
     }
+
+    @Override
+    public Category get(int id) {
+        return this.categoryRepo.findById(id).orElseThrow();
+    }
 }
