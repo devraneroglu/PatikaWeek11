@@ -2,6 +2,7 @@ package dev.patika.ecommerce.api;
 
 import dev.patika.ecommerce.business.abstracts.ICategoryService;
 import dev.patika.ecommerce.core.config.modelMapper.IModelMapperService;
+import dev.patika.ecommerce.core.result.Result;
 import dev.patika.ecommerce.core.result.ResultData;
 import dev.patika.ecommerce.core.utilies.ResultHelper;
 import dev.patika.ecommerce.dto.request.category.CategorySaveRequest;
@@ -56,14 +57,24 @@ public class CategoryController {
 //        cursor.setTotalElements(categoryResponsePage.getTotalElements());
         return ResultHelper.cursor(categoryResponsePage);
     }
+
     @PutMapping()
     @ResponseStatus(HttpStatus.OK)
     public ResultData<CategoryResponse> update(@Valid @RequestBody CategoryUpdateRequest categoryUpdateRequest) {
-        this.categoryService.get(categoryUpdateRequest.getId());
+        //  this.categoryService.get(categoryUpdateRequest.getId());
         Category updateCategory = this.modelMapper.forRequest().map(categoryUpdateRequest, Category.class);
-        this.categoryService.save(updateCategory);
+        this.categoryService.update(updateCategory);
         CategoryResponse categoryResponse = this.modelMapper.forResponse().map(updateCategory, CategoryResponse.class);
         return ResultHelper.success(categoryResponse);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Result delete(@PathVariable("id") int id) {
+        this.categoryService.delete(id);
+        return ResultHelper.ok();
+
+    }
+
 
 }

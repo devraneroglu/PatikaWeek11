@@ -21,6 +21,10 @@ public class ResultHelper {
         return new ResultData<>(true, Msg.OK, "200", data);
     }
 
+    public static Result ok() {
+        return new Result(true, Msg.OK, "200");
+    }
+
     public static Result notFoundError(String msg) {
         return new Result(false, msg, "404");
     }

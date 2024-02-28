@@ -7,5 +7,10 @@ public interface ICategoryService {
     Category save(Category category);
 
     Category get(int id);
-    Page<Category> cursor(int page,int pageSize);     //SAYFALAMA
+
+    Page<Category> cursor(int page, int pageSize);     //SAYFALAMA
+
+    Category update(Category category);
+
+    boolean delete(int id);
 }
